@@ -2,3 +2,24 @@
     text-decoration: none;
     color: black;
 }
+
+.main-buttons{
+   text-align: center;
+}
+
+.main-buttons ul{
+    list-style: none;
+    padding: 20px;
+}
+.main-buttons ul li{
+    padding: 20px;
+}
+
+.main-buttons ul li img{
+    width: 200px;
+    height: 200px;
+}
+
+.main-buttons ul li button{
+    font-size: 30px;
+}
