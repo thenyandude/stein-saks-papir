@@ -10,6 +10,10 @@ body{
 
 .main-buttons{
    text-align: center;
+   position: absolute;
+   top: 500px;
+   left: 330px;
+   z-index: 5;
 }
 
 .main-buttons ul{
@@ -18,6 +22,8 @@ body{
 }
 .main-buttons ul li{
     padding: 20px;
+    display: inline-block;
+
 }
 
 
@@ -28,11 +34,17 @@ body{
     width: 1800px;
     background-color: aquamarine;
     position: absolute;
+    margin: 0px;
+}
+
+.profile-player{
+    width:200px;
 }
 
 .profile-player ul{
     list-style: none;
     padding: 20px;
+    width: 200px;
 }
 .profile-player ul li{
     padding: 20px;
@@ -42,18 +54,20 @@ body{
     width: 200px;
     height: 200px;
     position: relative;
-    left: 200px;
+    left: 400px;
 }
 
 .profile-cpu ul{
     list-style: none;
     padding: 20px;
     position: relative;
+    width: 200px;
     left: 1200px;
     bottom: 880px;
 }
 .profile-cpu ul li{
     padding: 20px;
+    width: 200px;
 }
 
 .profile-cpu ul li img{
