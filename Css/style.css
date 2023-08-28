@@ -27,6 +27,7 @@ body{
     height: 1000px;
     width: 1800px;
     background-color: aquamarine;
+    position: absolute;
 }
 
 .profile-player ul{
@@ -40,6 +41,35 @@ body{
 .profile-player ul li img{
     width: 200px;
     height: 200px;
+    position: relative;
+    left: 200px;
+}
+
+.profile-cpu ul{
+    list-style: none;
+    padding: 20px;
+    position: relative;
+    left: 1200px;
+    bottom: 880px;
+}
+.profile-cpu ul li{
+    padding: 20px;
+}
+
+.profile-cpu ul li img{
+    width: 200px;
+    height: 200px;
+}
+
+.countdown{
+    height: 300px;
+    width:300px;
+    background-color: #797979;
+    position: relative;
+    left: 45%;
+    bottom: 500px;
+    text-align: center;
+    font-size: 250px;
 }
 
 
