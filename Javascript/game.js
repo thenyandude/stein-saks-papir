@@ -1,28 +1,47 @@
-imgs = ["Rock.png", "Scissor.png", "Paper.png"]
+imgs = ["Rock.png", "Scissor.png", "Paper.png"];
 
 playerImg = document.getElementById("player-choise-img");
 
-playerImg.src = "../Imgs/" + "Scissor.png"
+playerImg.src = "../Imgs/" + "Scissor.png";
 
+let intervalId = null; // Variable to hold the interval ID
 
 rockButton = document.getElementById("rock-button");
 
 rockButton.addEventListener('click', function() {
     changeImage("Rock");
+    stopLoop(); 
 });
 
-rockButton = document.getElementById("scissor-button");
+scissorButton = document.getElementById("scissor-button");
 
-rockButton.addEventListener('click', function() {
+scissorButton.addEventListener('click', function() {
     changeImage("Scissor");
+    stopLoop(); 
 });
 
-rockButton = document.getElementById("paper-button");
+paperButton = document.getElementById("paper-button");
 
-rockButton.addEventListener('click', function() {
+paperButton.addEventListener('click', function() {
     changeImage("Paper");
+    stopLoop();
 });
 
-function changeImage (string){
-    playerImg.src = "../Imgs/" + string + ".png"
+function changeImage(string) {
+    playerImg.src = "../Imgs/" + string + ".png";
 }
+
+function loopImages() {
+    let i = 0;
+
+    intervalSpeed = setInterval(function() {
+        playerImg.src = "../Imgs/" + imgs[i];
+        i = (i + 1) % imgs.length;
+    }, 250);
+}
+
+function stopLoop() {
+    clearInterval(intervalSpeed);
+}
+
+loopImages();
