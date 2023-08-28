@@ -57,13 +57,19 @@ body{
     left: 400px;
 }
 
+.profile-cpu{
+    height:500px;
+    position: relative;
+    bottom: 380px;
+}
+
 .profile-cpu ul{
     list-style: none;
     padding: 20px;
     position: relative;
     width: 200px;
     left: 1200px;
-    bottom: 880px;
+    bottom: 480px;
 }
 .profile-cpu ul li{
     padding: 20px;
@@ -91,6 +97,15 @@ body{
 
 .main-buttons ul li button{
     font-size: 30px;
+}
+
+#start-match{
+    position: absolute;
+    top: 550px;
+    left: 900px;
+    background-color: red;
+    font-size: 30px;
+    z-index: 5;
 }
 
 
