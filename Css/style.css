@@ -20,14 +20,38 @@ body{
     padding: 20px;
 }
 
-.main-buttons ul li img{
+
+/*  PROFILES*/
+
+.profiles{
+    height: 1000px;
+    width: 1800px;
+    background-color: aquamarine;
+}
+
+.profile-player ul{
+    list-style: none;
+    padding: 20px;
+}
+.profile-player ul li{
+    padding: 20px;
+}
+
+.profile-player ul li img{
     width: 200px;
     height: 200px;
 }
 
+
+
+
 .main-buttons ul li button{
     font-size: 30px;
 }
+
+
+
+/* main page*/
 
 .main-container{
     background-color: rgb(172, 128, 213);
