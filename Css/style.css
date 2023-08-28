@@ -1,3 +1,8 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
 .new-web-page{
     text-decoration: none;
     color: black;
@@ -23,3 +28,43 @@
 .main-buttons ul li button{
     font-size: 30px;
 }
+
+.main-container{
+    background-color: rgb(172, 128, 213);
+    height: 900px;
+    margin: 0px
+}
+
+#main-title{
+    text-align: center;
+    padding-bottom: 5%;
+    position: relative;
+}
+
+#rules{
+    text-align: center;
+    padding-top: 2%;
+    font-size: 20px;
+}
+
+#main-title{
+    text-align: center;
+    padding-top: 5%;
+}
+
+#start-main-page{
+    text-align: center;
+    padding-top: 2%;
+}
+
+#start-main-page button{
+font-size: 30px;
+background-color:#797979;
+border: 0px;
+}
+
+#start-main-page button:hover{
+    font-size: 30px;
+    background-color:#c1c1c1;
+    border: 0px;
+    }
