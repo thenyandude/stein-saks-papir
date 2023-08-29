@@ -10,21 +10,21 @@ rockButton = document.getElementById("rock-button");
 
 rockButton.addEventListener('click', function() {
     changeImage("Rock");
-    stopLoop(); 
+    stopLoopPlayer(); 
 });
 
 scissorButton = document.getElementById("scissor-button");
 
 scissorButton.addEventListener('click', function() {
     changeImage("Scissor");
-    stopLoop(); 
+    stopLoopPlayer(); 
 });
 
 paperButton = document.getElementById("paper-button");
 
 paperButton.addEventListener('click', function() {
     changeImage("Paper");
-    stopLoop();
+    stopLoopPlayer();
 });
 
 function changeImage(string) {
@@ -40,8 +40,28 @@ function loopImages() {
     }, 250);
 }
 
-function stopLoop() {
+function stopLoopPlayer() {
     clearInterval(intervalSpeed);
 }
 
-loopImages();
+function startMatch(){
+    loopImages();
+    countDown();
+}
+
+function countDown() {
+    const countdown = document.getElementById("countdown");
+    
+    let i = 3;
+
+    function updateCountDown() {
+        countdown.innerText = i;
+        i--;
+
+        if (i >= 0) {
+            setTimeout(updateCountDown, 1000);
+        }
+    }
+
+    updateCountDown();
+}
