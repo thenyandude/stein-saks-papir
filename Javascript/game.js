@@ -44,9 +44,9 @@ function submitMove(move){
     
 }
 
-compareMoves(move1,move2){
+function compareMoves(move1,move2){
     if(move == "scissor"&& move2 =="rock" ||move == "paper"&& move2 =="scissor" || move == "rock"&& move2 =="paper" ){
-        
+    // put logic here    
     }
 }
 
