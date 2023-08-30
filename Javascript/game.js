@@ -71,15 +71,15 @@ playerMove = "blank"
 
 
 playerWins = 0
-playerWinsScreen = document.getElementById("player-wins")
+playerWinsScreen = document.getElementById("player-wins");
 playerPoints = 0 
-playerPointsScreen = document.getElementById("player-points")
+playerPointsScreen = document.getElementById("player-points");
 
 
 cpuWins = 0
-cpuWinsScreen = document.getElementById("cpu-wins")
+cpuWinsScreen = document.getElementById("cpu-wins");
 cpuPoints = 0
-cpuPointsScreen = document.getElementById("cpu-points")
+cpuPointsScreen = document.getElementById("cpu-points");
 
 drawScreen = document.getElementById("draw")
 
@@ -91,22 +91,18 @@ function cpuChooseMove(movesArray,imgsArray) {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[1]
             stopLoops();
-            console.log("Scissor CPU")
         } else if (playerMove === "scissor") {
             cpuMove = movesArray[0];
             cpuImg.src = "../Imgs/" + imgsArray[0]
             stopLoops();
-            console.log("Rock CPU")
         } else if (playerMove === "rock") {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[2]
-            console.log("Paper CPU")
             stopLoops();
         }
     } else {
         const randomIndex = Math.floor(Math.random() * movesArray.length);
         cpuMove = movesArray[randomIndex];
-        console.log("Random " + cpuMove)
 
     }
     return cpuMove;
@@ -123,20 +119,24 @@ function compareMoves(move1,move2){
         playerPointsScreen.innerText = playerPoints
     } else if(move1==move2) {
         drawScreen.style.display = "block";
-        console.log("Draw")
     }
 
-    if(playerPoints >= 2){
+    if(playerPoints >= 2    ){
         playerWins++
+        console.log(playerWins)
+        console.log(playerPoints)
         playerWinsScreen.innerText = playerWins;
     
         playerPoints = 0;
+        playerPointsScreen.innerText = playerPoints;
     }
 
     if(cpuPoints >= 2){
         cpuWins++
-        cpuPointsScreen.innerText = cpuWins
-        cpuPoints = 0
+        cpuWinsScreen.innerText = cpuWins;
+    
+        cpuPoints = 0;
+        cpuPointsScreen.innerText = cpuPoints;
     }
 }
 
@@ -178,21 +178,21 @@ function countDown() {
         if(playerMove == "blank" && countdownElement.innerText == "Show" ){
             cpuPoints++
             cpuPointsScreen.innerText = cpuPoints;
-
         }
 
         if (i < -1) {
             countdownRound++;
             playerMove = "blank";
+            compareMoves(playerMove,cpuMove)
             i = 3;
             drawScreen.style.display = "none";
         }
 
-        if (countdownRound < 3) {
+        if (countdownRound < 6) {
             setTimeout(updateCountDown, 1000);
         }
 
-        if (countdownRound == 3){
+        if (playerWins == 1 || cpuWins == 1){
             stopMatch();
         }
     }
