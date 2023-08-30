@@ -150,9 +150,14 @@ function startMatch(){
     drawScreen.style.display = "none";
 }
 
+// ... (previous code)
+
+let countdownTimer = null; // New variable to store the countdown timer
+
 function stopMatch(){
     drawScreen.style.display = "none";
-    stopLoops()
+    stopLoops();
+    clearTimeout(countdownTimer); // Clear the countdown timer
 }
 
 function countDown() {
@@ -160,7 +165,6 @@ function countDown() {
     drawScreen.style.display = "none";
 
     let i = 3;
-    let countdownRound = 0;
 
     loopImagesPlayer();
     loopCpuImages();
@@ -174,28 +178,26 @@ function countDown() {
 
         i--;
 
-
         if(playerMove == "blank" && countdownElement.innerText == "Show" ){
             cpuPoints++
             cpuPointsScreen.innerText = cpuPoints;
         }
 
         if (i < -1) {
-            countdownRound++;
             playerMove = "blank";
-            compareMoves(playerMove,cpuMove)
+            compareMoves(playerMove, cpuMove)
             i = 3;
             drawScreen.style.display = "none";
         }
 
-        if (countdownRound < 6) {
-            setTimeout(updateCountDown, 1000);
-        }
-
-        if (playerWins == 1 || cpuWins == 1){
+        if (playerWins >= 1 || cpuWins >= 1){
             stopMatch();
+            console.log("STOPPING MATCH")
+        } else {
+            countdownTimer = setTimeout(updateCountDown, 1000);
         }
     }
 
     updateCountDown();
 }
+
