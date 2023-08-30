@@ -12,7 +12,7 @@ rockButton = document.getElementById("rock-button");
 rockButton.addEventListener('click', function() {
     changeImage("rock", cpuMove);
     playerMove="rock"
-    stopLoopPlayer(); 
+    stopLoops(); 
     compareMoves(playerMove,cpuMove);
 });
 
@@ -21,7 +21,7 @@ scissorButton = document.getElementById("scissor-button");
 scissorButton.addEventListener('click', function() {
     changeImage("scissor", cpuMove);
     playerMove="scissor"
-    stopLoopPlayer();
+    stopLoops();
 
     compareMoves(playerMove,cpuMove);
 });
@@ -31,16 +31,21 @@ paperButton = document.getElementById("paper-button");
 paperButton.addEventListener('click', function() {
     changeImage("paper", cpuMove);
     playerMove="paper"
-    stopLoopPlayer();
+    stopLoops();
 
     compareMoves(playerMove,cpuMove);
 });
 
 function changeImage(string, cpu) {
     playerImg.src = "../Imgs/" + string + ".png";
-
     cpuImg.src = "../Imgs/" + cpu + ".png";
+
+    setTimeout(function() {
+        loopImagesPlayer();
+        loopCpuImages();
+    }, 1000);
 }
+
 
 function loopImagesPlayer() {
     intervalSpeedPlayerLoop = setInterval(function() {
@@ -76,18 +81,18 @@ function cpuChooseMove(movesArray,imgsArray) {
         if (playerMove === "paper") {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[1]
-            stopLoopPlayer();
+            stopLoops();
             console.log("Scissor CPU")
         } else if (playerMove === "scissor") {
             cpuMove = movesArray[0];
             cpuImg.src = "../Imgs/" + imgsArray[0]
-            stopLoopPlayer();
+            stopLoops();
             console.log("Rock CPU")
         } else if (playerMove === "rock") {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[2]
             console.log("Paper CPU")
-            stopLoopPlayer();
+            stopLoops();
         }
     } else {
         const randomIndex = Math.floor(Math.random() * movesArray.length);
@@ -113,16 +118,19 @@ function compareMoves(move1,move2){
     }
 }
 
-function stopLoopPlayer() {
+function stopLoops() {
     clearInterval(intervalSpeedPlayerLoop);
     clearInterval(intervalSpeedCpuLoop);
 }
 
 function startMatch(){
-    loopImagesPlayer();
-    loopCpuImages();
     countDown();
     drawScreen.style.display = "none";
+}
+
+function stopMatch(){
+    drawScreen.style.display = "none";
+    stopLoops()
 }
 
 function countDown() {
@@ -152,6 +160,10 @@ function countDown() {
 
         if (countdownRound < 3) {
             setTimeout(updateCountDown, 1000);
+        }
+
+        if (countdownRound == 3){
+            stopMatch();
         }
     }
 

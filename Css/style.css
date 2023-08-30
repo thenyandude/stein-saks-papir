@@ -86,7 +86,7 @@ body{
 
 #start-match{
     position: absolute;
-    top: 633px;
+    top: 630px;
     height: 40px;
     left: 900px;
     background-color: red;
@@ -144,6 +144,38 @@ body{
     position: absolute;
     bottom:0px;
     left: 750px;
+
+    z-index: 5;
+}
+
+#player-matches-won{
+    position: absolute;
+    left: 490px;
+
+    height: 50px;
+    width: 100px;
+
+    background-color: #797979;
+
+    text-align: center;
+    font-size: 30px;
+
+    z-index: 5;
+}
+
+#cpu-matches-won{
+    position: absolute;
+
+    top:-70px;
+    left: 90px;
+
+    height: 50px;
+    width: 100px;
+
+    background-color: #797979;
+
+    text-align: center;
+    font-size: 30px;
 
     z-index: 5;
 }
