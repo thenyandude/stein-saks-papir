@@ -44,11 +44,31 @@ function submitMove(move){
     
 }
 
+playerPoints = 0
+cpuPoints = 0
+
 function compareMoves(move1,move2){
-    if(move == "scissor"&& move2 =="rock" ||move == "paper"&& move2 =="scissor" || move == "rock"&& move2 =="paper" ){
-    // put logic here    
+    if(move1 == "scissor"&& move2 =="rock" ||move1 == "paper"&& move2 =="scissor" || move1 == "rock"&& move2 =="paper" ){
+        cpuPoints ++  
+        console.log(cpuPoints)
+  
+    } else if(move2 == "scissor"&& move1 =="rock" ||move2 == "paper"&& move1 =="scissor" || move2 == "rock"&& move1 =="paper"){
+        playerPoints ++
+        console.log(playerPoints)
+    } else {
+        console.log("draw")
     }
 }
+
+compareMoves("scissor","rock")
+
+compareMoves("paper","rock")
+
+compareMoves("rock","rock")
+
+
+
+
 
 function stopLoopPlayer() {
     clearInterval(intervalSpeed);
