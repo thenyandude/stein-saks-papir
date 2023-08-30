@@ -150,14 +150,12 @@ function startMatch(){
     drawScreen.style.display = "none";
 }
 
-// ... (previous code)
-
-let countdownTimer = null; // New variable to store the countdown timer
+let countdownTimer = null;
 
 function stopMatch(){
     drawScreen.style.display = "none";
     stopLoops();
-    clearTimeout(countdownTimer); // Clear the countdown timer
+    clearTimeout(countdownTimer);
 }
 
 function countDown() {
