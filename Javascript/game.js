@@ -42,14 +42,14 @@ function changeImage(string) {
 }
 
 function loopImagesPlayer() {
-    intervalSpeed = setInterval(function() {
+    intervalSpeedPlayer = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
         playerImg.src = "../Imgs/" + imgs[randomIndex];
     }, 250);
 }
 
 function loopCpuImages() {
-    cpuIntervalSpeed = setInterval(function() {
+    intervalSpeedCpu = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
         cpuImg.src = "../Imgs/" + imgs[randomIndex];
     }, 250);
@@ -70,24 +70,31 @@ drawScreen = document.getElementById("draw")
 
 const moves = ["rock", "scissor", "paper"];
 
-function cpuChooseMove(movesArray) {
+function cpuChooseMove(movesArray,imgsArray) {
     if (countdown.innerText == "3" || countdown.innerText == "2" || countdown.innerText == "1") {
         if (playerMove === "paper") {
             cpuMove = movesArray[1];
+            cpuImg.src = "../Imgs/" + imgsArray[1]
+            stopLoopPlayer();
         } else if (playerMove === "scissor") {
             cpuMove = movesArray[0];
+            cpuImg.src = "../Imgs/" + imgsArray[0]
+            stopLoopPlayer();
         } else if (playerMove === "rock") {
             cpuMove = movesArray[1];
+            cpuImg.src = "../Imgs/" + imgsArray[2]
+            stopLoopPlayer();
         }
     } else {
         const randomIndex = Math.floor(Math.random() * movesArray.length);
         cpuMove = movesArray[randomIndex];
+
     }
     return cpuMove;
 }
 
 function compareMoves(move1,move2){
-    cpuMove = cpuChooseMove(moves);
+    cpuMove = cpuChooseMove(moves,imgs);
     if(move1 == "scissor"&& move2 =="rock" ||move1 == "paper"&& move2 =="scissor" || move1 == "rock"&& move2 =="paper" ){
         cpuPoints ++  
         cpuPointsScreen.innerText = cpuPoints;
@@ -104,7 +111,6 @@ function compareMoves(move1,move2){
 function stopLoopPlayer() {
     clearInterval(intervalSpeedPlayer);
     clearInterval(intervalSpeedCpu);
-
 }
 
 function startMatch(){
@@ -124,8 +130,12 @@ function countDown() {
         countdown.innerText = i;
         i--;
 
-        if (i >= 0) {
+        if (i >= -1) {
             setTimeout(updateCountDown, 1000);
+        }
+
+        if(i===-2){
+            countdown.innerText = "Show"
         }
     }
 
