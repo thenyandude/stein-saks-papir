@@ -1,30 +1,41 @@
-imgs = ["Rock.png", "Scissor.png", "Paper.png"];
+const imgs = ["Rock.png", "Scissor.png", "Paper.png"];
 
 playerImg = document.getElementById("player-choise-img");
 
 playerImg.src = "../Imgs/" + "Scissor.png";
 
-let intervalId = null; // Variable to hold the interval ID
+
+
+let intervalId = null;
 
 rockButton = document.getElementById("rock-button");
 
 rockButton.addEventListener('click', function() {
     changeImage("Rock");
+    playerMove="rock"
     stopLoopPlayer(); 
+
+    compareMoves(playerMove,cpuMove)
 });
 
 scissorButton = document.getElementById("scissor-button");
 
 scissorButton.addEventListener('click', function() {
     changeImage("Scissor");
+    playerMove="scissor"
     stopLoopPlayer();
+
+    compareMoves(playerMove,cpuMove)
 });
 
 paperButton = document.getElementById("paper-button");
 
 paperButton.addEventListener('click', function() {
     changeImage("Paper");
+    playerMove="paper"
     stopLoopPlayer();
+
+    compareMoves(playerMove,cpuMove)
 });
 
 function changeImage(string) {
@@ -40,35 +51,47 @@ function loopImages() {
     }, 250);
 }
 
-function submitMove(move){
-    
+
+cpuMove = " "
+playerMove = " "
+
+playerPoints = 0 
+playerPointsScreen = document.getElementById("player-points")
+
+cpuPoints = 0
+cpuPointsScreen = document.getElementById("cpu-points")
+
+const moves = ["rock", "scissor", "paper"];
+
+function cpuChooseMove(movesArray) {
+    if (countdown.innerText == "3" || countdown.innerText == "2" || countdown.innerText == "1") {
+        if (playerMove === "paper") {
+            cpuMove = movesArray[1];
+        } else if (playerMove === "scissor") {
+            cpuMove = movesArray[0];
+        } else if (playerMove === "rock") {
+            cpuMove = movesArray[1];
+        }
+    } else {
+        const randomIndex = Math.floor(Math.random() * movesArray.length);
+        cpuMove = movesArray[randomIndex];
+    }
+    return cpuMove;
 }
 
-playerPoints = 0
-cpuPoints = 0
-
 function compareMoves(move1,move2){
+    cpuMove = cpuChooseMove(moves);
     if(move1 == "scissor"&& move2 =="rock" ||move1 == "paper"&& move2 =="scissor" || move1 == "rock"&& move2 =="paper" ){
         cpuPoints ++  
-        console.log(cpuPoints)
+        cpuPointsScreen.innerText = cpuPoints;
   
     } else if(move2 == "scissor"&& move1 =="rock" ||move2 == "paper"&& move1 =="scissor" || move2 == "rock"&& move1 =="paper"){
         playerPoints ++
-        console.log(playerPoints)
+        playerPointsScreen.innerText = playerPoints
     } else {
         console.log("draw")
     }
 }
-
-compareMoves("scissor","rock")
-
-compareMoves("paper","rock")
-
-compareMoves("rock","rock")
-
-
-
-
 
 function stopLoopPlayer() {
     clearInterval(intervalSpeed);
