@@ -69,9 +69,15 @@ function loopCpuImages() {
 cpuMove = " "
 playerMove = "blank"
 
+
+playerWins = 0
+playerWinsScreen = document.getElementById("player-wins")
 playerPoints = 0 
 playerPointsScreen = document.getElementById("player-points")
 
+
+cpuWins = 0
+cpuWinsScreen = document.getElementById("cpu-wins")
 cpuPoints = 0
 cpuPointsScreen = document.getElementById("cpu-points")
 
@@ -118,6 +124,19 @@ function compareMoves(move1,move2){
     } else if(move1==move2) {
         drawScreen.style.display = "block";
         console.log("Draw")
+    }
+
+    if(playerPoints >= 2){
+        playerWins++
+        playerWinsScreen.innerText = playerWins;
+    
+        playerPoints = 0;
+    }
+
+    if(cpuPoints >= 2){
+        cpuWins++
+        cpuPointsScreen.innerText = cpuWins
+        cpuPoints = 0
     }
 }
 

@@ -86,9 +86,9 @@ body{
 
 #start-match{
     position: absolute;
-    top: 630px;
+    top: 650px;
     height: 40px;
-    left: 900px;
+    left: 860px;
     background-color: red;
     font-size: 30px;
     z-index: 5;
@@ -148,7 +148,7 @@ body{
     z-index: 5;
 }
 
-#player-matches-won{
+#player-wins{
     position: absolute;
     left: 490px;
 
@@ -163,7 +163,7 @@ body{
     z-index: 5;
 }
 
-#cpu-matches-won{
+#cpu-wins{
     position: absolute;
 
     top:-70px;
