@@ -17,7 +17,7 @@ scissorButton = document.getElementById("scissor-button");
 
 scissorButton.addEventListener('click', function() {
     changeImage("Scissor");
-    stopLoopPlayer(); 
+    stopLoopPlayer();
 });
 
 paperButton = document.getElementById("paper-button");
@@ -38,6 +38,16 @@ function loopImages() {
         playerImg.src = "../Imgs/" + imgs[i];
         i = (i + 1) % imgs.length;
     }, 250);
+}
+
+function submitMove(move){
+    
+}
+
+compareMoves(move1,move2){
+    if(move == "scissor"&& move2 =="rock" ||move == "paper"&& move2 =="scissor" || move == "rock"&& move2 =="paper" ){
+        
+    }
 }
 
 function stopLoopPlayer() {
