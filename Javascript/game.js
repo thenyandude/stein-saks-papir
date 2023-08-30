@@ -43,6 +43,9 @@ function changeImage(string, cpu) {
     setTimeout(function() {
         loopImagesPlayer();
         loopCpuImages();
+        setInterval(function(){
+            stopLoops()
+        },4000)
     }, 1000);
 }
 
