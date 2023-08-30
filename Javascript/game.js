@@ -1,4 +1,4 @@
-const imgs = ["Rock.png", "Scissor.png", "Paper.png"];
+const imgs = ["rock.png", "scissor.png", "paper.png"];
 
 playerImg = document.getElementById("player-choise-img");
 
@@ -10,35 +10,36 @@ let intervalId = null;
 rockButton = document.getElementById("rock-button");
 
 rockButton.addEventListener('click', function() {
-    changeImage("Rock");
+    changeImage("rock", cpuMove);
     playerMove="rock"
     stopLoopPlayer(); 
-
-    compareMoves(playerMove,cpuMove)
+    compareMoves(playerMove,cpuMove);
 });
 
 scissorButton = document.getElementById("scissor-button");
 
 scissorButton.addEventListener('click', function() {
-    changeImage("Scissor");
+    changeImage("scissor", cpuMove);
     playerMove="scissor"
     stopLoopPlayer();
 
-    compareMoves(playerMove,cpuMove)
+    compareMoves(playerMove,cpuMove);
 });
 
 paperButton = document.getElementById("paper-button");
 
 paperButton.addEventListener('click', function() {
-    changeImage("Paper");
+    changeImage("paper", cpuMove);
     playerMove="paper"
     stopLoopPlayer();
 
-    compareMoves(playerMove,cpuMove)
+    compareMoves(playerMove,cpuMove);
 });
 
-function changeImage(string) {
+function changeImage(string, cpu) {
     playerImg.src = "../Imgs/" + string + ".png";
+
+    cpuImg.src = "../Imgs/" + cpu + ".png";
 }
 
 function loopImagesPlayer() {
@@ -76,18 +77,22 @@ function cpuChooseMove(movesArray,imgsArray) {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[1]
             stopLoopPlayer();
+            console.log("Scissor CPU")
         } else if (playerMove === "scissor") {
             cpuMove = movesArray[0];
             cpuImg.src = "../Imgs/" + imgsArray[0]
             stopLoopPlayer();
+            console.log("Rock CPU")
         } else if (playerMove === "rock") {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[2]
+            console.log("Paper CPU")
             stopLoopPlayer();
         }
     } else {
         const randomIndex = Math.floor(Math.random() * movesArray.length);
         cpuMove = movesArray[randomIndex];
+        console.log("Random " + cpuMove)
 
     }
     return cpuMove;
@@ -134,8 +139,11 @@ function countDown() {
             setTimeout(updateCountDown, 1000);
         }
 
-        if(i===-2){
+        if(i==-2){
             countdown.innerText = "Show"
+            countdown.style.fontSize="90px"
+            countdown.style.height = "100px"
+            countdown.style.bottom = "700px"
         }
     }
 
