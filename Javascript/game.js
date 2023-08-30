@@ -43,14 +43,14 @@ function changeImage(string, cpu) {
 }
 
 function loopImagesPlayer() {
-    intervalSpeedPlayer = setInterval(function() {
+    intervalSpeedPlayerLoop = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
         playerImg.src = "../Imgs/" + imgs[randomIndex];
     }, 250);
 }
 
 function loopCpuImages() {
-    intervalSpeedCpu = setInterval(function() {
+    intervalSpeedCpuLoop = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
         cpuImg.src = "../Imgs/" + imgs[randomIndex];
     }, 250);
@@ -114,8 +114,8 @@ function compareMoves(move1,move2){
 }
 
 function stopLoopPlayer() {
-    clearInterval(intervalSpeedPlayer);
-    clearInterval(intervalSpeedCpu);
+    clearInterval(intervalSpeedPlayerLoop);
+    clearInterval(intervalSpeedCpuLoop);
 }
 
 function startMatch(){
@@ -126,24 +126,32 @@ function startMatch(){
 }
 
 function countDown() {
-    const countdown = document.getElementById("countdown");
+    const countdownElement = document.getElementById("countdown");
     drawScreen.style.display = "none";
-    
+
     let i = 3;
+    let countdownRound = 0;
+
+    loopImagesPlayer();
+    loopCpuImages();
 
     function updateCountDown() {
-        countdown.innerText = i;
-        i--;
-
-        if (i >= -1) {
-            setTimeout(updateCountDown, 1000);
+        if (i >= 0) {
+            countdownElement.innerText = i;
+        } else {
+            countdownElement.innerText = "Show";
         }
 
-        if(i==-2){
-            countdown.innerText = "Show"
-            countdown.style.fontSize="90px"
-            countdown.style.height = "100px"
-            countdown.style.bottom = "700px"
+        i--;
+
+        if (i < -1) {
+            countdownRound++;
+            i = 3;
+            drawScreen.style.display = "none";
+        }
+
+        if (countdownRound < 3) {
+            setTimeout(updateCountDown, 1000);
         }
     }
 
