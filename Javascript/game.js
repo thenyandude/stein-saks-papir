@@ -67,7 +67,7 @@ function loopCpuImages() {
 
 
 cpuMove = " "
-playerMove = " "
+playerMove = "blank"
 
 playerPoints = 0 
 playerPointsScreen = document.getElementById("player-points")
@@ -155,8 +155,16 @@ function countDown() {
 
         i--;
 
+
+        if(playerMove == "blank" && countdownElement.innerText == "Show" ){
+            cpuPoints++
+            cpuPointsScreen.innerText = cpuPoints;
+
+        }
+
         if (i < -1) {
             countdownRound++;
+            playerMove = "blank";
             i = 3;
             drawScreen.style.display = "none";
         }
