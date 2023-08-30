@@ -182,4 +182,3 @@ function countDown() {
 
     updateCountDown();
 }
->>>>>>> Stashed changes
