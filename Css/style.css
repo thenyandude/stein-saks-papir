@@ -82,6 +82,8 @@ body{
     height: 200px;
 }
 
+/* UI*/
+
 #start-match{
     position: absolute;
     top: 633px;
@@ -128,6 +130,22 @@ body{
 
     position: absolute;
     top:460px;
+}
+
+#draw{
+    display: none;
+
+    height: 100px;
+    width:400px;
+    background-color: #797979;
+    text-align: center;
+    font-size: 100px;
+
+    position: absolute;
+    bottom:0px;
+    left: 750px;
+
+    z-index: 5;
 }
 
 

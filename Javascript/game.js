@@ -2,8 +2,7 @@ const imgs = ["Rock.png", "Scissor.png", "Paper.png"];
 
 playerImg = document.getElementById("player-choise-img");
 
-playerImg.src = "../Imgs/" + "Scissor.png";
-
+cpuImg = document.getElementById("cpu-choise-img");
 
 
 let intervalId = null;
@@ -42,14 +41,20 @@ function changeImage(string) {
     playerImg.src = "../Imgs/" + string + ".png";
 }
 
-function loopImages() {
-    let i = 0;
-
+function loopImagesPlayer() {
     intervalSpeed = setInterval(function() {
-        playerImg.src = "../Imgs/" + imgs[i];
-        i = (i + 1) % imgs.length;
+        const randomIndex = Math.floor(Math.random() * imgs.length);
+        playerImg.src = "../Imgs/" + imgs[randomIndex];
     }, 250);
 }
+
+function loopCpuImages() {
+    cpuIntervalSpeed = setInterval(function() {
+        const randomIndex = Math.floor(Math.random() * imgs.length);
+        cpuImg.src = "../Imgs/" + imgs[randomIndex];
+    }, 250);
+}
+
 
 
 cpuMove = " "
@@ -60,6 +65,8 @@ playerPointsScreen = document.getElementById("player-points")
 
 cpuPoints = 0
 cpuPointsScreen = document.getElementById("cpu-points")
+
+drawScreen = document.getElementById("draw")
 
 const moves = ["rock", "scissor", "paper"];
 
@@ -88,22 +95,28 @@ function compareMoves(move1,move2){
     } else if(move2 == "scissor"&& move1 =="rock" ||move2 == "paper"&& move1 =="scissor" || move2 == "rock"&& move1 =="paper"){
         playerPoints ++
         playerPointsScreen.innerText = playerPoints
-    } else {
-        console.log("draw")
+    } else if(move1==move2) {
+        drawScreen.style.display = "block";
+        console.log("Draw")
     }
 }
 
 function stopLoopPlayer() {
-    clearInterval(intervalSpeed);
+    clearInterval(intervalSpeedPlayer);
+    clearInterval(intervalSpeedCpu);
+
 }
 
 function startMatch(){
-    loopImages();
+    loopImagesPlayer();
+    loopCpuImages();
     countDown();
+    drawScreen.style.display = "none";
 }
 
 function countDown() {
     const countdown = document.getElementById("countdown");
+    drawScreen.style.display = "none";
     
     let i = 3;
 
