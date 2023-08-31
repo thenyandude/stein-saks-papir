@@ -155,8 +155,13 @@ let countdownTimer = null;
 function stopMatch(){
     drawScreen.style.display = "none";
     stopLoops();
+    stopLoops();
+    stopLoops();
     clearTimeout(countdownTimer);
 }
+
+winSound = new Audio("../Audio/WinSound.mp3")
+loseSound = new Audio("../Audio/LoseSound.wav")
 
 function countDown() {
     const countdownElement = document.getElementById("countdown");
@@ -188,9 +193,13 @@ function countDown() {
             drawScreen.style.display = "none";
         }
 
-        if (playerWins >= 1 || cpuWins >= 1){
+        if (playerWins >= 1){
             stopMatch();
+            winSound.play();
             console.log("STOPPING MATCH")
+        } else if(cpuWins >= 1) {
+            stopMatch();
+            loseSound.play();
         } else {
             countdownTimer = setTimeout(updateCountDown, 1000);
         }
