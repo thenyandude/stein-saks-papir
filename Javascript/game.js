@@ -66,6 +66,9 @@ function loopCpuImages() {
 
 
 
+let matchHistory = [];
+let matchHistoryScreen = document.getElementById("match-history");
+
 let cpuMove = " "
 let playerMove = "blank"
 
@@ -86,6 +89,8 @@ let cpuPointsScreen = document.getElementById("cpu-points");
 drawScreen = document.getElementById("draw")
 
 const moves = ["rock", "scissor", "paper"];
+
+console.log(matchHistoryScreen.innerText)
 
 function cpuChooseMove(movesArray,imgsArray) {
     if (countdown.innerText == "3" || countdown.innerText == "2" || countdown.innerText == "1") {
@@ -115,18 +120,23 @@ function compareMoves(move1,move2){
     if(move1 == "scissor"&& move2 =="rock" ||move1 == "paper"&& move2 =="scissor" || move1 == "rock"&& move2 =="paper" ){
         cpuPoints ++  
         cpuPointsScreen.innerText = cpuPoints;
+        matchHistory.push("Cpu Win" + `<br>`)
+        matchHistoryScreen.innerHTML = matchHistory.join("<br>");
   
     } else if(move2 == "scissor"&& move1 =="rock" ||move2 == "paper"&& move1 =="scissor" || move2 == "rock"&& move1 =="paper"){
         playerPoints ++
         playerPointsScreen.innerText = playerPoints
+        matchHistory.push("Player Win" + `<br>`)
+        matchHistoryScreen.innerHTML = matchHistory.join("<br>");
+
     } else if(move1==move2) {
         drawScreen.style.display = "block";
+        matchHistory.push("Draw" + `<br>`)
+        matchHistoryScreen.innerHTML = matchHistory.join("<br>");
     }
 
-    if(playerPoints >= 3    ){
+    if(playerPoints >= 2    ){
         playerWins++
-        console.log(playerWins)
-        console.log(playerPoints)
         playerWinsScreen.innerText = playerWinsStore;
 
         playerWinsStore ++;
@@ -135,14 +145,13 @@ function compareMoves(move1,move2){
         playerPointsScreen.innerText = playerPoints;
     }
 
-    if(cpuPoints >= 3){
+    if(cpuPoints >= 2){
         cpuWins++
         
         cpuPointsScreen.innerText = cpuWinsStore;
 
         cpuWinsStore ++;
-        console.log(playerWinsStore, cpuWinsStore)
-    
+
         cpuPoints = 0;
         cpuPointsScreen.innerText = cpuPoints;
     }
@@ -167,10 +176,11 @@ function stopMatch(){
     drawScreen.style.display = "none";
     stopLoops();
     stopLoops();
-    stopLoops();
     clearTimeout(countdownTimer);
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
+    stopLoops();
+    matchHistory = [];
 
     playerWins = 0;
     cpuWins = 0;
@@ -190,6 +200,7 @@ function countDown() {
     drawScreen.style.display = "none";
 
     let i = 3;
+    console.log(matchHistory)
 
     loopImagesPlayer();
     loopCpuImages();
@@ -228,4 +239,3 @@ function countDown() {
 
     updateCountDown();
 }
-

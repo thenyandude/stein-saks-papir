@@ -216,12 +216,12 @@ body{
     background-color: rgba(146, 146, 146, 0.635);
 }
 
-#match-info{
+#match-history{
     position:absolute;
-    top:250px;
-    left: 730px;
+    top:200px;
+    left: 900px;
     font-size: 30px;
-
+    text-align: center;
 }
 
 /* main page*/
