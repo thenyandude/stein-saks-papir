@@ -14,6 +14,8 @@ rockButton.addEventListener('click', function() {
     playerMove="rock"
     stopLoops(); 
     compareMoves(playerMove,cpuMove);
+
+    console.log(cpuMove)
 });
 
 scissorButton = document.getElementById("scissor-button");
@@ -24,6 +26,8 @@ scissorButton.addEventListener('click', function() {
     stopLoops();
 
     compareMoves(playerMove,cpuMove);
+
+    console.log(cpuMove)
 });
 
 paperButton = document.getElementById("paper-button");
@@ -34,6 +38,9 @@ paperButton.addEventListener('click', function() {
     stopLoops();
 
     compareMoves(playerMove,cpuMove);
+
+    console.log(cpuMove)
+    console.log(countdownElement.innerText)
 });
 
 function changeImage(string, cpu) {
@@ -43,7 +50,7 @@ function changeImage(string, cpu) {
     setTimeout(function() {
         loopImagesPlayer();
         loopCpuImages();
-        setInterval(function(){
+        intervalId = setInterval(function(){
             stopLoops()
         },4000)
     }, 1000);
@@ -90,14 +97,15 @@ drawScreen = document.getElementById("draw")
 
 const moves = ["rock", "scissor", "paper"];
 
-console.log(matchHistoryScreen.innerText)
+const countdownElement = document.getElementById("countdown");
 
 function cpuChooseMove(movesArray,imgsArray) {
-    if (countdown.innerText == "3" || countdown.innerText == "2" || countdown.innerText == "1") {
+    if (countdownElement.innerText == "3" || countdownElement.innerText == "2" || countdownElement.innerText == "1") {
         if (playerMove === "paper") {
             cpuMove = movesArray[1];
             cpuImg.src = "../Imgs/" + imgsArray[1]
             stopLoops();
+
         } else if (playerMove === "scissor") {
             cpuMove = movesArray[0];
             cpuImg.src = "../Imgs/" + imgsArray[0]
@@ -179,7 +187,6 @@ function stopMatch(){
     clearTimeout(countdownTimer);
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
-    stopLoops();
     matchHistory = [];
 
     playerWins = 0;
