@@ -216,6 +216,13 @@ body{
     background-color: rgba(146, 146, 146, 0.635);
 }
 
+#match-info{
+    position:absolute;
+    top:250px;
+    left: 730px;
+    font-size: 30px;
+
+}
 
 /* main page*/
 
