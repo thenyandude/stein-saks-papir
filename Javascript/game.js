@@ -175,6 +175,11 @@ function stopMatch(){
     playerWins = 0;
     cpuWins = 0;
 
+    playerPoints = 0;
+    playerPointsScreen.innerText = playerPoints;
+    cpuPoints = 0;
+    cpuPointsScreen.innerText = cpuPoints;
+
 }
 
 winSound = new Audio("../Audio/WinSound.mp3")
