@@ -66,20 +66,22 @@ function loopCpuImages() {
 
 
 
-cpuMove = " "
-playerMove = "blank"
+let cpuMove = " "
+let playerMove = "blank"
 
 
-playerWins = 0
-playerWinsScreen = document.getElementById("player-wins");
-playerPoints = 0 
-playerPointsScreen = document.getElementById("player-points");
+let playerWins = 0
+let playerWinsStore = 0
+let playerWinsScreen = document.getElementById("player-wins");
+let playerPoints = 0 
+let playerPointsScreen = document.getElementById("player-points");
 
 
-cpuWins = 0
-cpuWinsScreen = document.getElementById("cpu-wins");
-cpuPoints = 0
-cpuPointsScreen = document.getElementById("cpu-points");
+let cpuWins = 0
+let cpuWinsScreen = document.getElementById("cpu-wins");
+let cpuWinsStore = 0
+let cpuPoints = 0
+let cpuPointsScreen = document.getElementById("cpu-points");
 
 drawScreen = document.getElementById("draw")
 
@@ -121,19 +123,25 @@ function compareMoves(move1,move2){
         drawScreen.style.display = "block";
     }
 
-    if(playerPoints >= 2    ){
+    if(playerPoints >= 3    ){
         playerWins++
         console.log(playerWins)
         console.log(playerPoints)
-        playerWinsScreen.innerText = playerWins;
+        playerWinsScreen.innerText = playerWinsStore;
+
+        playerWinsStore ++;
     
         playerPoints = 0;
         playerPointsScreen.innerText = playerPoints;
     }
 
-    if(cpuPoints >= 2){
+    if(cpuPoints >= 3){
         cpuWins++
-        cpuWinsScreen.innerText = cpuWins;
+        
+        cpuPointsScreen.innerText = cpuWinsStore;
+
+        cpuWinsStore ++;
+        console.log(playerWinsStore, cpuWinsStore)
     
         cpuPoints = 0;
         cpuPointsScreen.innerText = cpuPoints;
@@ -148,6 +156,9 @@ function stopLoops() {
 function startMatch(){
     countDown();
     drawScreen.style.display = "none";
+
+    playerWinsScreen.innerText = playerWinsStore;
+    cpuWinsScreen.innerText = cpuWinsStore;
 }
 
 let countdownTimer = null;
@@ -158,6 +169,12 @@ function stopMatch(){
     stopLoops();
     stopLoops();
     clearTimeout(countdownTimer);
+    playerWinsScreen.innerText = playerWinsStore;
+    cpuWinsScreen.innerText = cpuWinsStore;
+
+    playerWins = 0;
+    cpuWins = 0;
+
 }
 
 winSound = new Audio("../Audio/WinSound.mp3")
@@ -196,7 +213,6 @@ function countDown() {
         if (playerWins >= 1){
             stopMatch();
             winSound.play();
-            console.log("STOPPING MATCH")
         } else if(cpuWins >= 1) {
             stopMatch();
             loseSound.play();
