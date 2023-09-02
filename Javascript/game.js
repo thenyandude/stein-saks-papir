@@ -45,30 +45,27 @@ paperButton.addEventListener('click', function() {
 
 function changeImage(string, cpu) {
     playerImg.src = "../Imgs/" + string + ".png";
-    cpuImg.src = "../Imgs/" + cpu + ".png";
-
-    setTimeout(function() {
-        loopImagesPlayer();
-        loopCpuImages();
-        intervalId = setInterval(function(){
-            stopLoops()
-        },4000)
-    }, 1000);
+    cpuImg.src = "../Imgs/" + cpu + ".png"; 
 }
+
+let intervalSpeedPlayerLoop = null; 
+let intervalSpeedCpuLoop = null;
 
 
 function loopImagesPlayer() {
+    clearInterval(intervalSpeedPlayerLoop)
     intervalSpeedPlayerLoop = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
         playerImg.src = "../Imgs/" + imgs[randomIndex];
-    }, 250);
+    }, 400);
 }
 
 function loopCpuImages() {
+    clearInterval(intervalSpeedCpuLoop)
     intervalSpeedCpuLoop = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
         cpuImg.src = "../Imgs/" + imgs[randomIndex];
-    }, 250);
+    }, 400);
 }
 
 
@@ -224,6 +221,8 @@ function countDown() {
         if(playerMove == "blank" && countdownElement.innerText == "Show" ){
             cpuPoints++
             cpuPointsScreen.innerText = cpuPoints;
+            matchHistory.push("Cpu Win" + `<br>`)
+            matchHistoryScreen.innerHTML = matchHistory.join("<br>");
         }
 
         if (i < -1) {
@@ -231,6 +230,8 @@ function countDown() {
             compareMoves(playerMove, cpuMove)
             i = 3;
             drawScreen.style.display = "none";
+            loopImagesPlayer();
+            loopCpuImages();
         }
 
         if (playerWins >= 1){
