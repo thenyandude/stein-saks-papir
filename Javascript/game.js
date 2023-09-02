@@ -204,28 +204,26 @@ function countDown() {
     drawScreen.style.display = "none";
 
     let i = 3;
-    console.log(matchHistory)
-
     loopImagesPlayer();
     loopCpuImages();
 
     function updateCountDown() {
-        if (i >= 0) {
+        if (i >= 1) {
             countdownElement.innerText = i;
         } else {
             countdownElement.innerText = "Show";
         }
-
+        console.log(i + "Before")
         i--;
 
-        if(playerMove == "blank" && countdownElement.innerText == "Show" ){
+        if(playerMove == "blank" && i == -2 ){
             cpuPoints++
             cpuPointsScreen.innerText = cpuPoints;
             matchHistory.push("Cpu Win" + `<br>`)
             matchHistoryScreen.innerHTML = matchHistory.join("<br>");
         }
 
-        if (i < -1) {
+        if (i == -2) {
             playerMove = "blank";
             compareMoves(playerMove, cpuMove)
             i = 3;
