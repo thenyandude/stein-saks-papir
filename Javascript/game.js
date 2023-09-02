@@ -98,6 +98,9 @@ const moves = ["rock", "scissor", "paper"];
 const countdownElement = document.getElementById("countdown");
 
 function cpuChooseMove(movesArray,imgsArray) {
+
+    // DETTE MÅ FIKSES!!!!
+
     if (countdownElement.innerText == "3" || countdownElement.innerText == "2" || countdownElement.innerText == "1") {
         if (playerMove === "paper") {
             cpuMove = movesArray[1];
@@ -141,7 +144,7 @@ function compareMoves(move1,move2){
         matchHistoryScreen.innerHTML = matchHistory.join("<br>");
     }
 
-    if(playerPoints >= 2    ){
+    if(playerPoints >= 2){
         playerWins++
         playerWinsScreen.innerText = playerWinsStore;
 
@@ -174,6 +177,7 @@ function startMatch(){
 
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
+    madeMove = false;
 }
 
 let countdownTimer = null;
@@ -189,6 +193,8 @@ function stopMatch(){
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
     matchHistory = [];
+
+    madeMove = true;
 
     playerWins = 0;
     cpuWins = 0;
