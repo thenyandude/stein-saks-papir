@@ -14,8 +14,6 @@ rockButton.addEventListener('click', function() {
     playerMove="rock"
     stopLoops(); 
     compareMoves(playerMove,cpuMove);
-
-    console.log(cpuMove)
 });
 
 scissorButton = document.getElementById("scissor-button");
@@ -26,8 +24,6 @@ scissorButton.addEventListener('click', function() {
     stopLoops();
 
     compareMoves(playerMove,cpuMove);
-
-    console.log(cpuMove)
 });
 
 paperButton = document.getElementById("paper-button");
@@ -38,9 +34,6 @@ paperButton.addEventListener('click', function() {
     stopLoops();
 
     compareMoves(playerMove,cpuMove);
-
-    console.log(cpuMove)
-    console.log(countdownElement.innerText)
 });
 
 function changeImage(string, cpu) {
@@ -182,6 +175,9 @@ function stopMatch(){
     stopLoops();
     stopLoops();
     clearTimeout(countdownTimer);
+    countdownElement.innerText = "Match over"
+    countdownElement.style.fontSize = "60px"
+    countdownElement.style.bottom = "670px"
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
     matchHistory = [];
@@ -213,7 +209,6 @@ function countDown() {
         } else {
             countdownElement.innerText = "Show";
         }
-        console.log(i + "Before")
         i--;
 
         if(playerMove == "blank" && i == -2 ){
