@@ -234,9 +234,11 @@ function countDown() {
 
         if (playerWins >= 1){
             stopMatch();
+            startMatchButton.innerText = "PLAY AGAIN?"
             winSound.play();
         } else if(cpuWins >= 1) {
             stopMatch();
+            startMatchButton.innerText = "PLAY AGAIN?"
             loseSound.play();
         } else {
             countdownTimer = setTimeout(updateCountDown, 1000);
@@ -245,3 +247,5 @@ function countDown() {
 
     updateCountDown();
 }
+
+startMatchButton = document.getElementById("start-match");
