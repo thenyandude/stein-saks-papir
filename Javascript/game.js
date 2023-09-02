@@ -10,30 +10,38 @@ let intervalId = null;
 rockButton = document.getElementById("rock-button");
 
 rockButton.addEventListener('click', function() {
-    changeImage("rock", cpuMove);
-    playerMove="rock"
-    stopLoops(); 
-    compareMoves(playerMove,cpuMove);
+    if(madeMove == false){
+        madeMove = true;
+        changeImage("rock", cpuMove);
+        playerMove="rock"
+        stopLoops(); 
+        compareMoves(playerMove,cpuMove);
+    }
 });
 
 scissorButton = document.getElementById("scissor-button");
 
 scissorButton.addEventListener('click', function() {
-    changeImage("scissor", cpuMove);
-    playerMove="scissor"
-    stopLoops();
+    if(madeMove == false){
+        madeMove = true;
+        changeImage("scissor", cpuMove);
+        playerMove="scissor"
+        stopLoops();
 
-    compareMoves(playerMove,cpuMove);
+        compareMoves(playerMove,cpuMove);
+    }
 });
 
 paperButton = document.getElementById("paper-button");
 
 paperButton.addEventListener('click', function() {
-    changeImage("paper", cpuMove);
-    playerMove="paper"
-    stopLoops();
-
-    compareMoves(playerMove,cpuMove);
+    if(madeMove == false){
+        madeMove = true;
+        changeImage("paper", cpuMove);
+        playerMove="paper"
+        stopLoops();
+        compareMoves(playerMove,cpuMove);
+    }
 });
 
 function changeImage(string, cpu) {
@@ -61,7 +69,7 @@ function loopCpuImages() {
     }, 400);
 }
 
-
+let madeMove = false;
 
 let matchHistory = [];
 let matchHistoryScreen = document.getElementById("match-history");
@@ -208,6 +216,7 @@ function countDown() {
             countdownElement.innerText = i;
         } else {
             countdownElement.innerText = "Show";
+            madeMove = false;
         }
         i--;
 
