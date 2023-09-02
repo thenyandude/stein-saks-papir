@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-
+        <!-- Denne holder knappene spilleren bruker -->
     <div class="main-buttons">
         <ul>
             <li><button type="button" id="rock-button"> <img src="../Imgs/rock.png" alt="Velg stein"> </button></li>
@@ -16,6 +16,7 @@
         </ul>
     </div>
 
+    <!-- Denne holder spill profilene til spilleren og cpu-en (Wins,Bilder,Valg av stein,saks,papir, og poeng) -->
     <div class = "profiles">
         <div class="profile-player">
         <ul>
@@ -40,13 +41,14 @@
             <li>     <p id="cpu-points">0</p> </li>
         </ul>
     </div>
-
+    <!-- Dette er nedtellingen -->
     <p id="countdown">Timer</p>
 
+    <!-- Denne viser om det blir likt mellom spilleren og cpu -->
     <p id="draw">DRAW!</p>
-    
+    <!-- Denne knappen starter kampen -->
     <button type="button" id="start-match" onclick="startMatch()"> START MATCH </button>
-
+    <!-- Denne viser hva som har skjedd i en hel runde -->
     <div><p id ="match-history">HER ER <br> INFO OM KAMPEN</p></div>
 
     <script src="../Javascript/game.js"></script>
