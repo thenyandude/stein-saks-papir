@@ -174,6 +174,7 @@ function startMatch(){
 
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
+    madeMove = false;
 }
 
 let countdownTimer = null;
@@ -189,6 +190,7 @@ function stopMatch(){
     playerWinsScreen.innerText = playerWinsStore;
     cpuWinsScreen.innerText = cpuWinsStore;
     matchHistory = [];
+    madeMove = true;
 
     playerWins = 0;
     cpuWins = 0;
