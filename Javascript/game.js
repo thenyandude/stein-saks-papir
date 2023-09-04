@@ -79,8 +79,8 @@ paperButton.addEventListener('click', function() {
 });
 
 // Bytter bildet på skjermen
-function changeImage(string, cpu) {
-    playerImg.src = "../Imgs/" + string + ".png";
+function changeImage(player, cpu) {
+    playerImg.src = "../Imgs/" + player + ".png";
     cpuImg.src = "../Imgs/" + cpu + ".png"; 
 }
 
@@ -105,7 +105,7 @@ function loopCpuImages() {
 
 
 //CPU lager et valg, først sjekk om timer er før "VIS" og om den er det, gjør det som vinner, ellers gjør noe tilfeldig.
-function cpuChooseMove(imgsArray) {
+function cpuChooseMove(movesArray) {
     if (countdownElement.innerText == "3" || countdownElement.innerText == "2" || countdownElement.innerText == "1") {
         if (playerMove == "scissor") {
             cpuMove = "rock";
@@ -116,13 +116,12 @@ function cpuChooseMove(imgsArray) {
         }
 
         // Update CPU's image source here
-        cpuImg.src = "../Imgs/" + cpuMove + ".png";
         } else {
-        const randomIndex = Math.floor(Math.random() * imgsArray.length);
-        cpuMove = imgsArray[randomIndex];
+        const randomIndex = Math.floor(Math.random() * movesArray.length);
+        cpuMove = movesArray[randomIndex];
 
         // Update CPU's image source here
-        cpuImg.src = "../Imgs/" + cpuMove + ".png";
+        changeImage(playerMove,cpuMove);
     }
 
     // Update both player and CPU images
@@ -135,6 +134,8 @@ function cpuChooseMove(imgsArray) {
 
   //Sammenligner om move1 (spiller) og move2 (CPU) er vinner eller taper, så inkrementer matchhistory, og poengsum
   function compareMoves(move1, move2) {
+
+     move2 = cpuChooseMove(moves);
 
     if (move1 === move2) {
         drawScreen.style.display = "block";
@@ -215,7 +216,6 @@ loseSound = new Audio("../Audio/LoseSound.wav")
 // 
 
 function countDown() {
-    const countdownElement = document.getElementById("countdown");
     drawScreen.style.display = "none";
 
     let i = 3;
