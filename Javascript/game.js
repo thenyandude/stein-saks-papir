@@ -1,11 +1,44 @@
 const imgs = ["rock.png", "scissor.png", "paper.png"];
 
-playerImg = document.getElementById("player-choise-img");
+const playerImg = document.getElementById("player-choise-img");
 
-cpuImg = document.getElementById("cpu-choise-img");
+const cpuImg = document.getElementById("cpu-choise-img");
 
 
 let intervalId = null;
+
+let madeMove = false;
+
+let matchHistory = [];
+let matchHistoryScreen = document.getElementById("match-history");
+
+let cpuMove = " "
+let playerMove = "blank"
+
+
+let playerWins = 0
+let playerWinsStore = 0
+let playerWinsScreen = document.getElementById("player-wins");
+let playerPoints = 0 
+let playerPointsScreen = document.getElementById("player-points");
+
+
+let cpuWins = 0
+let cpuWinsScreen = document.getElementById("cpu-wins");
+let cpuWinsStore = 0
+let cpuPoints = 0
+let cpuPointsScreen = document.getElementById("cpu-points");
+
+const drawScreen = document.getElementById("draw");
+
+let matchRunning = false;
+
+const moves = ["rock", "scissor", "paper"];
+
+const countdownElement = document.getElementById("countdown");
+
+let intervalSpeedPlayerLoop = null; 
+let intervalSpeedCpuLoop = null;
 
 rockButton = document.getElementById("rock-button");
 // Kanppene gjør at du gjør et move, bytter bildet, registrerer playerMove, stopper animasjonen og sammenligner moves
@@ -51,8 +84,6 @@ function changeImage(string, cpu) {
     cpuImg.src = "../Imgs/" + cpu + ".png"; 
 }
 
-let intervalSpeedPlayerLoop = null; 
-let intervalSpeedCpuLoop = null;
 
 //Animerer en tillfeldig loop av bilder
 function loopImagesPlayer() {
@@ -72,69 +103,60 @@ function loopCpuImages() {
     }, 400);
 }
 
-let madeMove = false;
-
-let matchHistory = [];
-let matchHistoryScreen = document.getElementById("match-history");
-
-let cpuMove = " "
-let playerMove = "blank"
-
-
-let playerWins = 0
-let playerWinsStore = 0
-let playerWinsScreen = document.getElementById("player-wins");
-let playerPoints = 0 
-let playerPointsScreen = document.getElementById("player-points");
-
-
-let cpuWins = 0
-let cpuWinsScreen = document.getElementById("cpu-wins");
-let cpuWinsStore = 0
-let cpuPoints = 0
-let cpuPointsScreen = document.getElementById("cpu-points");
-
-drawScreen = document.getElementById("draw");
-
-let matchRunning = false;
-
-const moves = ["rock", "scissor", "paper"];
-
-const countdownElement = document.getElementById("countdown");
 
 //CPU lager et valg, først sjekk om timer er før "VIS" og om den er det, gjør det som vinner, ellers gjør noe tilfeldig.
 function cpuChooseMove(imgsArray) {
+    if (countdownElement.innerText == "3" || countdownElement.innerText == "2" || countdownElement.innerText == "1") {
+        if (playerMove == "scissor") {
+            cpuMove = "rock";
+        } else if (playerMove == "paper") {
+            cpuMove = "scissor";
+        } else if (playerMove == "rock") {
+            cpuMove = "paper";
+        }
+
+        // Update CPU's image source here
+        cpuImg.src = "../Imgs/" + cpuMove + ".png";
+        } else {
         const randomIndex = Math.floor(Math.random() * imgsArray.length);
         cpuMove = imgsArray[randomIndex];
-        cpuImg.src = "../Imgs/" +cpuMove +".png"
 
-        return cpuMove;
+        // Update CPU's image source here
+        cpuImg.src = "../Imgs/" + cpuMove + ".png";
     }
+
+    // Update both player and CPU images
+    changeImage(playerMove, cpuMove);
+
+    return cpuMove;
+}
+
+
+
   //Sammenligner om move1 (spiller) og move2 (CPU) er vinner eller taper, så inkrementer matchhistory, og poengsum
-function compareMoves(move1,move2){
-    cpuMove = cpuChooseMove(moves,imgs);
+  function compareMoves(move1, move2) {
 
-    console.log(playerMove, cpuMove + "  Before")
-
-
-    if(move1 == "scissor" && move2 =="rock" ||move1 == "paper"&& move2 =="scissor" || move1 == "rock"&& move2 =="paper" ){
-        cpuPoints++  
-        cpuPointsScreen.innerText = cpuPoints;
-        matchHistory.push("Cpu Win" + `<br>`)
-        matchHistoryScreen.innerHTML = matchHistory.join("<br>");
-  
-    } else if(move1==move2) {
+    if (move1 === move2) {
         drawScreen.style.display = "block";
-        matchHistory.push("Draw" + `<br>`)
+        matchHistory.push("Draw" + `<br>`);
         matchHistoryScreen.innerHTML = matchHistory.join("<br>");
-
+    } else if (
+        (move1 === "rock" && move2 === "scissor") ||
+        (move1 === "scissor" && move2 === "paper") ||
+        (move1 === "paper" && move2 === "rock")
+    ) {
+        playerPoints++;
+        playerPointsScreen.innerText = playerPoints;
+        matchHistory.push("Player Win" + `<br>`);
+        matchHistoryScreen.innerHTML = matchHistory.join("<br>");
     } else {
-        playerPoints++  
-        playerPointsScreen.innerText = cpuPoints;
-        matchHistory.push("Player Win" + `<br>`)
+        cpuPoints++;
+        cpuPointsScreen.innerText = cpuPoints;
+        matchHistory.push("Cpu Win" + `<br>`);
         matchHistoryScreen.innerHTML = matchHistory.join("<br>");
     }
 }
+
 
 //stopper animasjonsloopene
 
@@ -209,7 +231,7 @@ function countDown() {
             playermove = "blank";
         }
         i--;
-        console.log(playerMove, cpuMove + "  After")
+        console.log("player"+playerMove,"cpu" + cpuMove)
        checkMatch();
 
         if(madeMove == false && playerMove=="blank" && i == -2 ){
