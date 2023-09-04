@@ -92,6 +92,7 @@ body{
     background-color: red;
     font-size: 30px;
     z-index: 5;
+    display: block;
 }
 
 #start-match:hover{
