@@ -104,34 +104,19 @@ const countdownElement = document.getElementById("countdown");
 
 //CPU lager et valg, først sjekk om timer er før "VIS" og om den er det, gjør det som vinner, ellers gjør noe tilfeldig.
 function cpuChooseMove(imgsArray) {
-
-    // DETTE MÅ FIKSES!!!!
-
-    if (countdownElement.innerText == "3" || countdownElement.innerText == "2" || countdownElement.innerText == "1") {
-        if (playerMove === "paper") {
-            cpuImg.src = "../Imgs/" + imgsArray[1] + ".png"
-            cpuMove = imgsArray[1];
-            stopLoops();
-
-        } else if (playerMove === "scissor") {
-            cpuImg.src = "../Imgs/" + imgsArray[0] + ".png"
-            cpuMove = imgsArray[0];
-            stopLoops();
-        } else if (playerMove === "rock") {
-            cpuImg.src = "../Imgs/" + imgsArray[2] + ".png"
-            cpuMove = imgsArray[2];
-            stopLoops();
-        }
-    } else {
         const randomIndex = Math.floor(Math.random() * imgsArray.length);
         cpuMove = imgsArray[randomIndex];
+        cpuImg.src = "../Imgs/" +cpuMove +".png"
 
+        return cpuMove;
     }
-    return cpuMove;
-}
   //Sammenligner om move1 (spiller) og move2 (CPU) er vinner eller taper, så inkrementer matchhistory, og poengsum
 function compareMoves(move1,move2){
     cpuMove = cpuChooseMove(moves,imgs);
+
+    console.log(playerMove, cpuMove + "  Before")
+
+
     if(move1 == "scissor" && move2 =="rock" ||move1 == "paper"&& move2 =="scissor" || move1 == "rock"&& move2 =="paper" ){
         cpuPoints++  
         cpuPointsScreen.innerText = cpuPoints;
@@ -149,8 +134,6 @@ function compareMoves(move1,move2){
         matchHistory.push("Player Win" + `<br>`)
         matchHistoryScreen.innerHTML = matchHistory.join("<br>");
     }
-
-// Hvis noen vinner 2 runder får de en vinn, lagrer vinn-mengden, og resetter poengsumm 
 }
 
 //stopper animasjonsloopene
@@ -226,9 +209,7 @@ function countDown() {
             playermove = "blank";
         }
         i--;
-        console.log(playerMove, cpuMove)
-        console.log(matchRunning)
-
+        console.log(playerMove, cpuMove + "  After")
        checkMatch();
 
         if(madeMove == false && playerMove=="blank" && i == -2 ){
@@ -238,6 +219,7 @@ function countDown() {
             matchHistoryScreen.innerHTML = matchHistory.join("<br>");
         }
 
+        // Hvis noen vinner 2 runder får de en vinn, lagrer vinn-mengden, og resetter poengsumm 
         if(playerPoints >= 2){
             playerWins++
             playerWinsScreen.innerText = playerWinsStore;
