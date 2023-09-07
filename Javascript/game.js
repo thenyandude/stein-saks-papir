@@ -53,7 +53,7 @@ class RockPaperScissors {
         clearInterval(this.intervalSpeedCpuLoop);
         this.intervalSpeedCpuLoop = setInterval(() => {
             const randomIndex = Math.floor(Math.random() * this.imgs.length);
-            this.cpuImg.src = randomIndex;
+            this.cpuImg.src = `../Imgs/${this.imgs[randomIndex]}`;
         }, 400);
     }
 
@@ -66,11 +66,11 @@ class RockPaperScissors {
             } else if (this.playerMove == "rock") {
                 this.cpuMove = "paper";
             }
-            // Update CPU's image source here
+            this.cpuImg.src = "../Imgs/"+this.cpuMove + ".png"
         } else {
             const randomIndex = Math.floor(Math.random() * movesArray.length);
             this.cpuMove = movesArray[randomIndex];
-            // Update CPU's image source here
+            this.cpuImg.src = "../Imgs/"+this.cpuMove + ".png"
         }
         // Update both player and CPU images
         this.changeImage(this.playerMove, this.cpuMove);
