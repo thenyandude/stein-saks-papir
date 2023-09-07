@@ -1,87 +1,75 @@
-const imgs = ["rock.png", "scissor.png", "paper.png"];
-
-const playerImg = document.getElementById("player-choise-img");
-
-const cpuImg = document.getElementById("cpu-choise-img");
 
 
-let intervalId = null;
+class RockPaperScissors{
+    profiles(){
+        this.rockButton=document.getElementById("rock-button");
+        this.scissorButton = document.getElementById("scissor-button");
+        this.paperButton = document.getElementById("paper-button");
 
-let madeMove = false;
+        this.imgs = ["rock.png", "scissor.png", "paper.png"];
+        this.playerImg = document.getElementById("player-choise-img");
 
-let matchHistory = [];
-let matchHistoryScreen = document.getElementById("match-history");
+        this.moves = ["rock", "scissor", "paper"];
+        this.cpuMove = " "
+        this.playerMove = "blank"
 
-let cpuMove = " "
-let playerMove = "blank"
+        this.playerWins = 0
+        this.playerWinsScreen = document.getElementById("player-wins");
+        this.playerWinsStore = 0
+        this.playerPointsScreen = document.getElementById("player-points");
+        this.madeMove = false;
 
+        this.cpuWins = 0
+        this.cpuWinsScreen = document.getElementById("cpu-wins");
+        this.cpuWinsStore = 0
+        this.cpuPoints = 0
+        this.cpuPointsScreen = document.getElementById("cpu-points");
+    }
 
-let playerWins = 0
-let playerWinsStore = 0
-let playerWinsScreen = document.getElementById("player-wins");
-let playerPoints = 0 
-let playerPointsScreen = document.getElementById("player-points");
+    match(){
+        this.matchHistory = [];
+        this.matchHistoryScreen = document.getElementById("match-history");
 
+        this.drawScreen = document.getElementById("draw");
 
-let cpuWins = 0
-let cpuWinsScreen = document.getElementById("cpu-wins");
-let cpuWinsStore = 0
-let cpuPoints = 0
-let cpuPointsScreen = document.getElementById("cpu-points");
+        this.matchRunning = false;
 
-const drawScreen = document.getElementById("draw");
+        this.countdownElement = document.getElementById("countdown");
 
-let matchRunning = false;
+        this.intervalSpeedPlayerLoop = null; 
+        this.intervalSpeedCpuLoop = null;
+    }
 
-const moves = ["rock", "scissor", "paper"];
+}
 
-const countdownElement = document.getElementById("countdown");
-
-let intervalSpeedPlayerLoop = null; 
-let intervalSpeedCpuLoop = null;
+const game = new RockPaperScissors();
 
 rockButton = document.getElementById("rock-button");
 // Kanppene gjør at du gjør et move, bytter bildet, registrerer playerMove, stopper animasjonen og sammenligner moves
-rockButton.addEventListener('click', function() {
-    if(madeMove == false){
-        madeMove = true;
-        changeImage("rock", cpuMove);
-        playerMove="rock"
-        stopLoops(); 
-        compareMoves(playerMove,cpuMove);
-    }
-});
+rockButton.addEventListener('click', function() {});
 
 scissorButton = document.getElementById("scissor-button");
-// Kanppene gjør at du gjør et move, bytter bildet, registrerer playerMove, stopper animasjonen og sammenligner moves
-scissorButton.addEventListener('click', function() {
-    if(madeMove == false){
-        madeMove = true;
-        changeImage("scissor", cpuMove);
-        playerMove="scissor"
-        stopLoops();
 
-        compareMoves(playerMove,cpuMove);
-    }
-});
+scissorButton.addEventListener('click', function() {});
 
 paperButton = document.getElementById("paper-button");
 
-// Kanppene gjør at du gjør et move, bytter bildet, registrerer playerMove, stopper animasjonen og sammenligner moves
-paperButton.addEventListener('click', function() {
-    if(madeMove == false){
-        madeMove = true;
-        changeImage("paper", cpuMove);
-        playerMove="paper"
-        stopLoops();
-        compareMoves(playerMove,cpuMove);
-    }
-});
+paperButton.addEventListener('click', playerMakeMove("paper"));
 
 // Bytter bildet på skjermen
 function changeImage(player, cpu) {
-    playerImg.src = "../Imgs/" + player + ".png";
-    cpuImg.src = "../Imgs/" + cpu + ".png"; 
+    game.playerImg.src = `../Imgs/${player}.png`;
+    game.playerImg.src = `../Imgs/${cpu}.png`;
+}
+
+function playerMakeMove(moveType){
+    if(game.madeMove == false){
+        game.madeMove = true;
+        changeImage(moveType, cpuMove);
+        game.playerMove=moveType
+        stopLoops();
+        compareMoves(playerMove,cpuMove);
+    }
 }
 
 
@@ -90,7 +78,7 @@ function loopImagesPlayer() {
     clearInterval(intervalSpeedPlayerLoop)
     intervalSpeedPlayerLoop = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
-        playerImg.src = "../Imgs/" + imgs[randomIndex];
+        playerImg.src = "../Imgs/" + game.imgs[randomIndex];
     }, 400);
 }
 
@@ -99,7 +87,7 @@ function loopCpuImages() {
     clearInterval(intervalSpeedCpuLoop)
     intervalSpeedCpuLoop = setInterval(function() {
         const randomIndex = Math.floor(Math.random() * imgs.length);
-        cpuImg.src = "../Imgs/" + imgs[randomIndex];
+        cpuImg.src = "../Imgs/" + game.imgs[randomIndex];
     }, 400);
 }
 
